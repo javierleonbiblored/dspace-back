@@ -1,7 +1,5 @@
 package co.gov.biblored.serviciosDspace.controller;
 
-import co.gov.biblored.serviciosDspace.dto.MetadatavalueDto;
-import co.gov.biblored.serviciosDspace.model.Metadatavalue;
 import co.gov.biblored.serviciosDspace.repository.MetadatavalueRepository;
 import co.gov.biblored.serviciosDspace.service.MetadatavalueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +17,21 @@ public class MetadatavalueController {
 
     @Autowired
     private MetadatavalueService metadatavalueService;
+    @Autowired
+    private MetadatavalueRepository metadatavalueRepository;
 
-   // @Autowired
+    // @Autowired
     //private MetadatavalueRepository metadatavalueRepository;
 
     @GetMapping("/count-metadatavalueServices")
     public ResponseEntity<Integer> countMetadatavalueServiceByElement(@RequestParam String element) {
         int count = metadatavalueService.contMetadatavalueByElemet(element);
         return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/metadatavalueServices")
+    public List<Object[]> metadatavalueServiceByElement(@RequestParam String element) {
+        return metadatavalueRepository.consultaMetadata(element);
     }
 
    /* @GetMapping("/data")
